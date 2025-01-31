@@ -25,6 +25,6 @@ public class DogMovement : MonoBehaviour
 
 
         cc.Move(movement * Time.deltaTime * speed);
-
     }
+
 }
