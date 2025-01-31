@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class DogMovement : MonoBehaviour
@@ -6,6 +7,13 @@ public class DogMovement : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] Animator animator;
     [SerializeField] float rotSpeed = 230f;
+
+
+    private void Start()
+    {
+        Debug.Log(gameObject.tag);
+    }
+
 
     // Update is called once per frame
     void Update()
