@@ -23,7 +23,7 @@ public class DogMovement : MonoBehaviour
         Vector3 rot = Vector3.up * Time.deltaTime * rotSpeed * Input.GetAxis("Mouse X");
         transform.Rotate(rot);
 
-
+        movement = Vector3.ClampMagnitude(movement, 1.0f);
         cc.Move(movement * Time.deltaTime * speed);
     }
 
