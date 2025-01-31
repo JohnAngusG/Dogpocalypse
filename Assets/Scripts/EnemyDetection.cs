@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class EnemyDetection : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private GameManager gm;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        gm.Freeze();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
