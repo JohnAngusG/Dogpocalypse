@@ -8,14 +8,6 @@ public class DogMovement : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] float rotSpeed = 230f;
 
-
-    private void Start()
-    {
-        Debug.Log(gameObject.tag);
-    }
-
-
-    // Update is called once per frame
     void Update()
     {
 

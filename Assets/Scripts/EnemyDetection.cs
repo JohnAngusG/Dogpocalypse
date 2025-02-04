@@ -1,36 +1,66 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDetection : MonoBehaviour
 {
+
     [SerializeField] private GameManager gm;
+    [SerializeField] private float radius = 6.50f;
     private Ray sight;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnDogNearby(Vector3 dogPosition)
     {
+        Vector3 directionToDog = dogPosition - transform.position;
+        RaycastHit hit;
+        print(directionToDog);
 
+        if (Physics.Raycast(transform.position, directionToDog, out hit, 15f)) {
+            if (hit.transform.CompareTag("Player")) {
+                gm.Freeze();
+            
+            
+            }
+        }
 
-        gm.Freeze();
-        transform.LookAt(other.transform.position);
-
-        //sight.origin = transform.position;
-        //sight.direction = transform.forward;
-        //RaycastHit hit;
-        //Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        //if (Physics.Raycast(sight, out hit, 30f)) { 
-        //    Debug.DrawLine(sight.origin, hit.point, Color.red);
-        //    Debug.Log(hit.collider.tag);
-
-        //    if (hit.collider.tag == "Player") {
-        //        gm.Freeze();
-        //        transform.LookAt(other.transform.position);
-        //    }
-
-        //}
-
-
-
+        Debug.DrawRay(transform.position, directionToDog, Color.red);
 
     }
+    
+
+    public void Update()
+    {
+        Vector3 dogPosition = GetNear(radius);
+        if(dogPosition != Vector3.zero) {
+            OnDogNearby(dogPosition);
+        }
+    }
+
+
+    public Vector3 GetNear(float radius) { 
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
+
+        foreach (Collider collider in hitColliders) { 
+            DogMovement dog = collider.GetComponent<DogMovement>();
+
+            if (dog != null)
+            {
+                return dog.transform.position;
+            }
+
+        }
+
+        return Vector3.zero;
+    
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, radius);
+        Gizmos.DrawLine(transform.position, Vector3.forward * 10f);
+    
+    
+    }
+
 
 }
