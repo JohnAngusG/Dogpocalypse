@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject dog;
     [SerializeField] TextMeshProUGUI winText;
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] private float timer = 0;
 
     private DogMovement dm;
     private Animator animator;
@@ -15,6 +17,15 @@ public class GameManager : MonoBehaviour
         dm = dog.GetComponent<DogMovement>();
         animator = dog.GetComponent<Animator>();
     }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        timerText.text = "Time: " + timer;
+    }
+
+
+
 
     public void Freeze() {
         dm.enabled = false;
