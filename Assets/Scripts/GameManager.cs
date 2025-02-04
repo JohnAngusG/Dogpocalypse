@@ -1,11 +1,12 @@
-using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject dog;
+    
     private DogMovement dm;
     private Animator animator;
+    private uint pickups = 3;
 
     private void Start()
     {
@@ -26,7 +27,11 @@ public class GameManager : MonoBehaviour
     //    animator.SetBool("Caught", false);
     //}
 
-
+    public void Pickup() {
+        pickups--;
+        print(pickups);
+        
+    }
 
 
 
