@@ -7,8 +7,8 @@ public class PickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("pickup triggered");
         gm.Pickup();
+        // gameObject.SetActive(false);
     }
 
 

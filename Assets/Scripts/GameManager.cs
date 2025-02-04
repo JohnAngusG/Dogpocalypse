@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject dog;
-    
+    [SerializeField] TextMeshProUGUI winText;
+
     private DogMovement dm;
     private Animator animator;
     private uint pickups = 3;
@@ -29,8 +31,9 @@ public class GameManager : MonoBehaviour
 
     public void Pickup() {
         pickups--;
-        print(pickups);
-        
+        if (pickups == 0) { 
+            winText.gameObject.SetActive(true);
+        }
     }
 
 
