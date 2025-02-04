@@ -200,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9b6109bf119d20a40a3ce4a6edb4f182, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9b6109bf119d20a40a3ce4a6edb4f182, type: 3}
       propertyPath: m_LocalPosition.z
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cc: {fileID: 311399220}
-  speed: 10
+  speed: 5
   animator: {fileID: 311399221}
   rotSpeed: 230
 --- !u!1 &331568601

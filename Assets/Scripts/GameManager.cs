@@ -17,14 +17,14 @@ public class GameManager : MonoBehaviour
         dm.enabled = false;
         animator.SetBool("Caught", true);
         animator.SetFloat("Speed", 0);
-        StartCoroutine(UnFreeze());
+        //StartCoroutine(UnFreeze());
     }
 
-    private IEnumerator UnFreeze() {
-        yield return new WaitForSeconds(2);
-        dm.enabled = true;
-        animator.SetBool("Caught", false);
-    }
+    //private IEnumerator UnFreeze() {
+    //    yield return new WaitForSeconds(2);
+    //    dm.enabled = true;
+    //    animator.SetBool("Caught", false);
+    //}
 
 
 

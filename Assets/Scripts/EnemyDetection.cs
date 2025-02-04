@@ -8,8 +8,10 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField] private float radius = 6.50f;
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float bound = 25f;
-    private bool goingRight = true;
 
+    private bool goingRight = true;
+    private bool patroling = true;
+    private bool seen = false;
 
     private Ray sight;
 
@@ -20,13 +22,13 @@ public class EnemyDetection : MonoBehaviour
     {
         Vector3 directionToDog = dogPosition - transform.position;
         RaycastHit hit;
-        print(directionToDog);
 
-        if (Physics.Raycast(transform.position, directionToDog, out hit, 15f)) {
+        if (Physics.Raycast(transform.position, directionToDog, out hit, 45f)) {
             if (hit.transform.CompareTag("Player")) {
+                patroling = false;
                 gm.Freeze();
-            
-            
+                transform.LookAt(hit.transform.position);
+                seen = true;
             }
         }
 
@@ -42,7 +44,14 @@ public class EnemyDetection : MonoBehaviour
         Vector3 dogPosition = GetNear(radius);
         if(dogPosition != Vector3.zero) {
             OnDogNearby(dogPosition);
+            if (seen) {
+                var step = speed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, dogPosition, step);
+            }
         }
+
+
+
     }
 
 
@@ -73,24 +82,28 @@ public class EnemyDetection : MonoBehaviour
     }
 
     private void Patrol() {
-        if (goingRight)
-        {
-            Vector3 movement = Vector3.right * speed * Time.deltaTime;
-            transform.position += movement;
-            if (transform.position.x > bound)
+        if (patroling) {
+            if (goingRight)
             {
-                goingRight = false;
-                transform.Rotate(Vector3.up * 180);
+                Vector3 movement = Vector3.right * speed * Time.deltaTime;
+                transform.position += movement;
+                if (transform.position.x > bound)
+                {
+                    goingRight = false;
+                    transform.Rotate(Vector3.up * 180);
+                }
+            }
+            else
+            {
+                Vector3 movement = Vector3.right * speed * Time.deltaTime;
+                transform.position -= movement;
+                if (transform.position.x < 0)
+                {
+                    goingRight = true;
+                    transform.Rotate(Vector3.up * 180);
+                }
             }
         }
-        else {
-            Vector3 movement = Vector3.right * speed * Time.deltaTime;
-            transform.position -= movement;
-            if (transform.position.x < 0)
-            {
-                goingRight = true;
-                transform.Rotate(Vector3.up * 180);
-            }
-        }
+        
     }
 }
