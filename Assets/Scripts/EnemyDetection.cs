@@ -8,6 +8,7 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField] private float radius = 6.50f;
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private float bound = 25f;
+    [SerializeField] private Animator animator;
 
     private bool goingRight = true;
     private bool patroling = true;
@@ -38,8 +39,14 @@ public class EnemyDetection : MonoBehaviour
         if(dogPosition != Vector3.zero) {
             OnDogNearby(dogPosition);
             if (seen) {
+                speed = 5f;
                 var step = speed * Time.deltaTime;
+                animator.SetBool("Spotted", true);
                 transform.position = Vector3.MoveTowards(transform.position, dogPosition, step);
+                if (transform.position == dogPosition) {
+                    animator.SetBool("OnPlayer", true);
+                }
+
             }
         }
     }
