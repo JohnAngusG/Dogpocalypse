@@ -27,12 +27,9 @@ public class EnemyDetection : MonoBehaviour
                 seen = true;
             }
         }
-
         Debug.DrawRay(transform.position, directionToDog, Color.red);
-
     }
     
-
     public void Update()
     {
         Patrol();
@@ -47,7 +44,6 @@ public class EnemyDetection : MonoBehaviour
         }
     }
 
-
     public Vector3 GetNear(float radius) { 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
 
@@ -58,11 +54,8 @@ public class EnemyDetection : MonoBehaviour
             {
                 return dog.transform.position;
             }
-
         }
-
         return Vector3.zero;
-    
     }
     private bool IsInFieldOfView(Vector3 neighbourPosition)
     {
@@ -75,10 +68,9 @@ public class EnemyDetection : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.position, radius);
         Gizmos.DrawLine(transform.position, Vector3.forward * 10f);
-    
-    
-    }
 
+
+    }
     private void Patrol() {
         if (patroling) {
             if (goingRight)
