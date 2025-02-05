@@ -13,10 +13,6 @@ public class EnemyDetection : MonoBehaviour
     private bool patroling = true;
     private bool seen = false;
 
-    private Ray sight;
-
-
-
 
     private void OnDogNearby(Vector3 dogPosition)
     {
@@ -49,9 +45,6 @@ public class EnemyDetection : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, dogPosition, step);
             }
         }
-
-
-
     }
 
 
