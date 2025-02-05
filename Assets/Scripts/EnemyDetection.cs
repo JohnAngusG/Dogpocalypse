@@ -20,7 +20,7 @@ public class EnemyDetection : MonoBehaviour
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, directionToDog, out hit, 45f)) {
-            if (hit.transform.CompareTag("Player")) {
+            if (hit.transform.CompareTag("Player") && IsInFieldOfView(dogPosition)) {
                 patroling = false;
                 gm.Freeze();
                 transform.LookAt(hit.transform.position);
@@ -64,7 +64,12 @@ public class EnemyDetection : MonoBehaviour
         return Vector3.zero;
     
     }
-
+    private bool IsInFieldOfView(Vector3 neighbourPosition)
+    {
+        float fieldOfViewAngle = 75f;
+        float angle = Vector3.Angle(transform.forward, neighbourPosition - transform.position);
+        return angle <= fieldOfViewAngle;
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
