@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI winText;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] private float timer = 0;
+    private int playerLives = 3;
 
     private DogMovement dm;
     private Animator animator;

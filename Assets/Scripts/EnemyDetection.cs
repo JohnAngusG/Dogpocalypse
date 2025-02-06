@@ -5,14 +5,15 @@ public class EnemyDetection : MonoBehaviour
 {
 
     [SerializeField] private GameManager gm;
-    [SerializeField] private float radius = 6.50f;
+    [SerializeField] private float radius = 3.50f;
     [SerializeField] private float speed = 10.0f;
-    [SerializeField] private float bound = 25f;
     [SerializeField] private Animator animator;
 
-    private bool goingRight = true;
     private bool patroling = true;
     private bool seen = false;
+
+    private float obstacleRange = 1.0f;
+    private float sphereRadius = 0.2f;
 
 
     private void OnDogNearby(Vector3 dogPosition)
@@ -80,23 +81,16 @@ public class EnemyDetection : MonoBehaviour
     }
     private void Patrol() {
         if (patroling) {
-            if (goingRight)
+            Vector3 movement = Vector3.forward * speed * Time.deltaTime;
+            transform.Translate(movement);
+            // generate Ray
+            Ray ray = new Ray(transform.position, transform.forward);
+            // Spherecast and determine if Enemy needs to turn
+            RaycastHit hit;
+            if (Physics.SphereCast(ray, sphereRadius, out hit))
             {
-                Vector3 movement = Vector3.right * speed * Time.deltaTime;
-                transform.position += movement;
-                if (transform.position.x > bound)
+                if (hit.distance < obstacleRange)
                 {
-                    goingRight = false;
-                    transform.Rotate(Vector3.up * 180);
-                }
-            }
-            else
-            {
-                Vector3 movement = Vector3.right * speed * Time.deltaTime;
-                transform.position -= movement;
-                if (transform.position.x < 0)
-                {
-                    goingRight = true;
                     transform.Rotate(Vector3.up * 180);
                 }
             }
