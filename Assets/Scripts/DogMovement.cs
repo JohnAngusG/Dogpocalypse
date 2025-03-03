@@ -1,3 +1,5 @@
+using NUnit.Framework.Interfaces;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DogMovement : MonoBehaviour
@@ -5,7 +7,6 @@ public class DogMovement : MonoBehaviour
     [SerializeField] CharacterController cc;
     [SerializeField] float speed = 10f;
     [SerializeField] Animator animator;
-    [SerializeField] float rotSpeed = 720f;
 
     [SerializeField] private GameObject model;          
     private float rotateToFaceMovementSpeed = 5f;       
@@ -13,6 +14,8 @@ public class DogMovement : MonoBehaviour
     [SerializeField] private Camera cam;                
     private float rotateToFaceAwayFromCameraSpeed = 5f;
 
+    [SerializeField] private AudioClip runSound;
+    [SerializeField] private AudioSource audioSrc;
 
 
     void Update()

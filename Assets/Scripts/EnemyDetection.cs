@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private Animator animator;
     [SerializeField] private Light eyeLight;
-    private Color defaultEyeColor;
 
+    int playerLayer;
     private bool patroling = true;
     private bool seen = false;
 
@@ -23,6 +24,7 @@ public class EnemyDetection : MonoBehaviour
         Vector3 directionToDog = dogPosition - transform.position;
         RaycastHit hit;
 
+
         if (Physics.Raycast(transform.position, directionToDog, out hit, 45f)) {
             if (hit.transform.CompareTag("Player") && IsInFieldOfView(dogPosition)) {
                 patroling = false;
@@ -34,6 +36,7 @@ public class EnemyDetection : MonoBehaviour
         Debug.DrawRay(transform.position, directionToDog, Color.red);
     }
     
+
     public void Update()
     {
         Patrol();
