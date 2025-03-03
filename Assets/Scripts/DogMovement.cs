@@ -34,6 +34,7 @@ public class DogMovement : MonoBehaviour
 
         if (movement.magnitude > 0) {
             RotateModelToFaceMovement(movement);
+            RotatePlayerToFaceAwayFromCamera();
         }
 
 
@@ -46,8 +47,8 @@ public class DogMovement : MonoBehaviour
         cc.Move(movement);
 
         // rotate the player
-        Vector3 rotation = Vector3.up * rotSpeed * Time.deltaTime * Input.GetAxis("Mouse X");
-        transform.Rotate(rotation);
+        // Vector3 rotation = Vector3.up * rotSpeed * Time.deltaTime * Input.GetAxis("Mouse X");
+        // transform.Rotate(rotation);
     }
 
     // Set the rotation of the model to match the direction of the movement vector
@@ -67,13 +68,13 @@ public class DogMovement : MonoBehaviour
     private void RotatePlayerToFaceAwayFromCamera()
     {
         // isolate the camera's Y rotation
-        //Quaternion camRotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y, 0);
+        Quaternion camRotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y, 0);
 
         // set the player's rotation
-        //transform.rotation = camRotation;
+        // transform.rotation = camRotation;
 
         // replace the above line with this one to enable smoothing
-        //transform.rotation = Quaternion.Slerp(transform.rotation, camRotation, rotateToFaceAwayFromCameraSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, camRotation, rotateToFaceAwayFromCameraSpeed * Time.deltaTime);
     }
 
 
