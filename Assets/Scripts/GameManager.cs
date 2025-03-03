@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         dm = dog.GetComponent<DogMovement>();
-        animator = dog.GetComponent<Animator>();
+        // animator = dog.GetComponent<Animator>();
     }
 
     private void Update()
@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
 
     public void Freeze() {
         dm.enabled = false;
-        animator.SetBool("Caught", true);
-        animator.SetFloat("Speed", 0);
+        // animator.SetBool("Caught", true);
+        // animator.SetFloat("Speed", 0);
         //StartCoroutine(UnFreeze());
     }
 
