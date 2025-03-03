@@ -1,10 +1,14 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject dog;
     [SerializeField] TextMeshProUGUI winText;
+    [SerializeField] TextMeshProUGUI heartCounter;
+    [SerializeField] GameObject heartImage;
     private int playerLives = 3;
 
     private DogMovement dm;
@@ -14,20 +18,20 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         dm = dog.GetComponent<DogMovement>();
-        // animator = dog.GetComponent<Animator>();
-    }
-    public void Freeze() {
-        dm.enabled = false;
-        // animator.SetBool("Caught", true);
-        // animator.SetFloat("Speed", 0);
-        //StartCoroutine(UnFreeze());
+        // heartCounter.text = "" + HeartCounter.Instance.heartCounter;
     }
 
-    //private IEnumerator UnFreeze() {
-    //    yield return new WaitForSeconds(2);
-    //    dm.enabled = true;
-    //    animator.SetBool("Caught", false);
-    //}
+    public void Freeze() {
+        dm.enabled = false;
+        StartCoroutine(Reset());
+    }
+
+    private IEnumerator Reset() {
+        yield return new WaitForSeconds(2);
+        HeartCounter.Instance.Spotted();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+    }
 
     public void Pickup() {
         pickups--;
