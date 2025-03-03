@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class EnemyDetection : MonoBehaviour
 {
-
     [SerializeField] private GameManager gm;
     [SerializeField] private float radius = 3.50f;
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private Animator animator;
     [SerializeField] private Light eyeLight;
+    private Vector3 spawnPt;
+    private Quaternion spawnRot;
+    private Color ogColor;
 
     int playerLayer;
     private bool patroling = true;
@@ -18,7 +20,12 @@ public class EnemyDetection : MonoBehaviour
     private float obstacleRange = 1.0f;
     private float sphereRadius = 0.2f;
 
-
+    private void Start()
+    {
+        spawnPt = transform.position;
+        spawnRot = transform.rotation;
+        ogColor = eyeLight.color;
+    }
     private void OnDogNearby(Vector3 dogPosition)
     {
         Vector3 directionToDog = dogPosition - transform.position;
@@ -27,16 +34,17 @@ public class EnemyDetection : MonoBehaviour
 
         if (Physics.Raycast(transform.position, directionToDog, out hit, 45f)) {
             if (hit.transform.CompareTag("Player") && IsInFieldOfView(dogPosition)) {
-                patroling = false;
-                gm.Freeze();
-                transform.LookAt(hit.transform.position);
-                seen = true;
+                if (!seen) {
+                    patroling = false;
+                    gm.Freeze();
+                    transform.LookAt(hit.transform.position);
+                    seen = true;
+                }
+                
             }
         }
         Debug.DrawRay(transform.position, directionToDog, Color.red);
     }
-    
-
     public void Update()
     {
         Patrol();
@@ -103,4 +111,20 @@ public class EnemyDetection : MonoBehaviour
         }
         
     }
+    public void Reset()
+    {
+        patroling = true;
+        seen = false;
+        speed = 1.5f;
+        eyeLight.color = ogColor;
+        transform.position = spawnPt;
+        transform.rotation = spawnRot;
+        animator.SetBool("Spotted", false);
+        animator.SetBool("OnPlayer", false);
+        animator.Rebind();
+        animator.Update(0f);
+    }
+
+
+
 }

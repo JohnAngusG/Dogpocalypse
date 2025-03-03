@@ -18,19 +18,25 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         dm = dog.GetComponent<DogMovement>();
-        // heartCounter.text = "" + HeartCounter.Instance.heartCounter;
+        heartCounter.text = "" + playerLives;
     }
 
     public void Freeze() {
-        dm.enabled = false;
-        StartCoroutine(Reset());
+        playerLives--;
+        if (playerLives > 0) {
+            StartCoroutine(Reset());
+        }
     }
 
     private IEnumerator Reset() {
         yield return new WaitForSeconds(2);
-        HeartCounter.Instance.Spotted();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
+        dm.Reset();
+
+        EnemyDetection[] enemies = FindObjectsByType<EnemyDetection>(FindObjectsSortMode.None);
+        foreach (EnemyDetection enemy in enemies) {
+            enemy.Reset();
+        }
     }
 
     public void Pickup() {

@@ -18,6 +18,8 @@ public class DogMovement : MonoBehaviour
     [SerializeField] private AudioSource audioSrc;
 
 
+    [SerializeField] private Vector3 spawnPt;
+
 
     private void Start()
     {
@@ -95,6 +97,10 @@ public class DogMovement : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, camRotation, rotateToFaceAwayFromCameraSpeed * Time.deltaTime);
     }
 
+    public void Reset()
+    {
+        transform.position = spawnPt;
+    }
 
 
 }

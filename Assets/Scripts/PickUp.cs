@@ -8,9 +8,11 @@ public class PickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gm.Pickup();
-        Destroy(gameObject);
-       
+        if(other.transform.tag == "Player")
+        {
+            gm.Pickup();
+            Destroy(gameObject);
+        }
     }
 
 
