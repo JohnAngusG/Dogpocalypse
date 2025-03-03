@@ -18,6 +18,14 @@ public class DogMovement : MonoBehaviour
     [SerializeField] private AudioSource audioSrc;
 
 
+
+    private void Start()
+    {
+        audioSrc.clip = runSound;
+        audioSrc.loop = true;
+    }
+
+
     void Update()
     {
 
@@ -35,9 +43,20 @@ public class DogMovement : MonoBehaviour
         // convert from local to global coordinates
         movement = transform.TransformDirection(movement);
 
-        if (movement.magnitude > 0) {
+        if (movement.magnitude > 0)
+        {
             RotateModelToFaceMovement(movement);
             RotatePlayerToFaceAwayFromCamera();
+            if (!audioSrc.isPlaying)
+            {
+                audioSrc.Play();
+            }
+        }
+        else {
+            if (audioSrc.isPlaying) {
+                audioSrc.Stop();
+            }
+        
         }
 
 
@@ -48,10 +67,6 @@ public class DogMovement : MonoBehaviour
 
         // move the player  (using the character controller)
         cc.Move(movement);
-
-        // rotate the player
-        // Vector3 rotation = Vector3.up * rotSpeed * Time.deltaTime * Input.GetAxis("Mouse X");
-        // transform.Rotate(rotation);
     }
 
     // Set the rotation of the model to match the direction of the movement vector
