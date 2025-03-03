@@ -20,25 +20,32 @@ public class GameManager : MonoBehaviour
         dm = dog.GetComponent<DogMovement>();
         heartCounter.text = "" + playerLives;
     }
-
-    public void Freeze() {
-        playerLives--;
-        if (playerLives > 0) {
-            StartCoroutine(Reset());
-        }
-    }
-
-    private IEnumerator Reset() {
-        yield return new WaitForSeconds(2);
-        
+    private void Reset()
+    {
         dm.Reset();
-
         EnemyDetection[] enemies = FindObjectsByType<EnemyDetection>(FindObjectsSortMode.None);
-        foreach (EnemyDetection enemy in enemies) {
+        foreach (EnemyDetection enemy in enemies)
+        {
             enemy.Reset();
         }
     }
-
+    public void Freeze()
+    {
+        playerLives--;
+        if (playerLives > 0)
+        {
+            StartCoroutine(SoftReset());
+        }
+    }
+    private IEnumerator SoftReset() {
+        yield return new WaitForSeconds(2);
+        Reset();
+        
+    }
+    private void HardReset() {
+        Reset();
+        playerLives = 3;
+    }
     public void Pickup() {
         pickups--;
         if (pickups == 0) { 
