@@ -8,6 +8,8 @@ public class EnemyDetection : MonoBehaviour
     [SerializeField] private float radius = 3.50f;
     [SerializeField] private float speed = 10.0f;
     [SerializeField] private Animator animator;
+    [SerializeField] private Light eyeLight;
+    private Color defaultEyeColor;
 
     private bool patroling = true;
     private bool seen = false;
@@ -43,6 +45,7 @@ public class EnemyDetection : MonoBehaviour
                 speed = 5f;
                 var step = speed * Time.deltaTime;
                 animator.SetBool("Spotted", true);
+                eyeLight.color = Color.red;
                 transform.position = Vector3.MoveTowards(transform.position, dogPosition, step);
                 if (transform.position == dogPosition) {
                     animator.SetBool("OnPlayer", true);
