@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         dm = dog.GetComponent<DogMovement>();
-        heartCounter.text = "" + playerLives;
     }
     private void Reset()
     {
@@ -51,6 +50,11 @@ public class GameManager : MonoBehaviour
         if (pickups == 0) { 
             winText.gameObject.SetActive(true);
         }
+    }
+
+    private void Update()
+    {
+        heartCounter.text = "" + playerLives;
     }
 
 
