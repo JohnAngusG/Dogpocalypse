@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI heartCounter;
     [SerializeField] GameObject heartImage;
     [SerializeField] private Button resetButton;
+    [SerializeField] private Button quitButton;
+
     private int playerLives = 3;
 
     private DogMovement dm;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         gamePaused = false;
         resetButton.gameObject.SetActive(false);
+        quitButton.gameObject.SetActive(false);
     }
     private void Reset()
     {
@@ -60,7 +63,10 @@ public class GameManager : MonoBehaviour
             winText.gameObject.SetActive(true);
         }
     }
-
+    public void Quit()
+    {
+        Application.Quit();
+    }
     private void Update()
     {
         heartCounter.text = "" + playerLives;
@@ -74,6 +80,7 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0.0f;
                 resetButton.gameObject.SetActive(true);
+                quitButton.gameObject.SetActive(true);
 
             }
             else {
@@ -82,7 +89,7 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1.0f;
                 resetButton.gameObject.SetActive(false);
-
+                quitButton.gameObject.SetActive(false);
             }
         }
 
