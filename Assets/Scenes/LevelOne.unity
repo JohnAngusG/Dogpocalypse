@@ -1039,6 +1039,7 @@ MonoBehaviour:
   winText: {fileID: 472292513}
   heartCounter: {fileID: 527832429}
   heartImage: {fileID: 1248221594}
+  resetButton: {fileID: 1614617099}
 --- !u!4 &331568603
 Transform:
   m_ObjectHideFlags: 0
