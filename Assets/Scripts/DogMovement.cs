@@ -61,7 +61,6 @@ public class DogMovement : MonoBehaviour
         
         }
 
-
         movement *= speed;
 
 
