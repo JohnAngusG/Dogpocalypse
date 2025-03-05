@@ -17,6 +17,9 @@ public class GoodDialogue : MonoBehaviour
     {
         textComponent.text = string.Empty;
         StartDialogue();
+    
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame

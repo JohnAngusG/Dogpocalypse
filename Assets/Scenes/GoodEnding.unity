@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1998893524}
-  quitButton: {fileID: 0}
+  quitButton: {fileID: 1913687298}
 --- !u!1 &1063800779
 GameObject:
   m_ObjectHideFlags: 0

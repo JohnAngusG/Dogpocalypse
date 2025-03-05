@@ -68,9 +68,9 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator PlayBadEnding() {
+    private IEnumerator PlayEnding(string sceneName) {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("BadEnding");
+        SceneManager.LoadScene(sceneName);
     }
 
 
@@ -101,7 +101,11 @@ public class GameManager : MonoBehaviour
         }
 
         if (playerLives == 0) {
-            StartCoroutine(PlayBadEnding());
+            StartCoroutine(PlayEnding("BadEnding"));
+        }
+
+        if (pickups == 0) {
+            StartCoroutine(PlayEnding("GoodEnding"));
         }
 
 
