@@ -67,6 +67,13 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    private IEnumerator PlayBadEnding() {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("BadEnding");
+    }
+
+
     private void Update()
     {
         heartCounter.text = "" + playerLives;
@@ -92,6 +99,11 @@ public class GameManager : MonoBehaviour
                 quitButton.gameObject.SetActive(false);
             }
         }
+
+        if (playerLives == 0) {
+            StartCoroutine(PlayBadEnding());
+        }
+
 
     }
 
